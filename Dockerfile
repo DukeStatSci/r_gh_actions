@@ -1,6 +1,6 @@
-FROM rocker/r-ubuntu:24.04
+FROM rocker/r2u:latest
 
-ADD Rprofile.site /usr/lib/R/etc/Rprofile.site
+#ADD Rprofile.site /usr/lib/R/etc/Rprofile.site
 
 RUN apt-get update \
  && apt-get upgrade -y
