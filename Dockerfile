@@ -6,13 +6,14 @@ RUN apt-get update \
  && apt-get upgrade -y
 
 RUN apt-get install -y --no-install-recommends \
+    software-properties-common \
     libudunits2-dev libgdal-dev libgeos-dev \
     libproj-dev pandoc libmagick++-dev \
     libglpk-dev libnode-dev \
     wget git rsync \
     && sed 's/value="1GiB"/value="8GiB"/1' /etc/ImageMagick-6/policy.xml > /etc/ImageMagick-6/policy.xml
 
-RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.33/quarto-1.7.33-linux-amd64.deb \
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.25/quarto-1.8.25-linux-amd64.deb \
     && DEBIAN_FRONTEND=noninteractive apt install ./quarto-*-linux-amd64.deb \
     && rm quarto-*-linux-amd64.deb
 
