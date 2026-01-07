@@ -18,22 +18,25 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.25/quar
     && rm quarto-*-linux-amd64.deb
 
 RUN install.r devtools rmarkdown quarto tidyverse gifski ggrepel ggpubr \
- && installGithub.r rundel/checklist rundel/parsermd djnavarro/jasmines \
- && installGithub.r Selbosh/ggchernoff
+ && installGithub.r rundel/checklist rundel/parsermd
+ #&& installGithub.r Selbosh/ggchernoff djnavarro/jasmines 
 
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
- && source $HOME/.local/bin/env \
- && uv python install 3.14 \
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+RUN uv python install 3.14 \
  && uv python pin 3.14 \
  && mkdir /work \
  && cd /work \
- && uv venv \
- && source .venv/bin/activate
+ && uv venv 
 
 RUN apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /work
+
+ENV VIRTUAL_ENV="/work/.venv"
+ENV PATH="/work/.venv/bin:$PATH"
+ENV RETICULATE_PYTHON="/work/.venv/bin/python"
 
 CMD ["bash"]
 
