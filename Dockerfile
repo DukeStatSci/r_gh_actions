@@ -24,10 +24,16 @@ RUN install.r devtools rmarkdown quarto tidyverse gifski ggrepel ggpubr \
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
  && source $HOME/.local/bin/env \
  && uv python install 3.14 \
- && uv python pin 3.14
+ && uv python pin 3.14 \
+ && mkdir /work \
+ && cd /work \
+ && uv venv \
+ && source .venv/bin/activate
 
 RUN apt-get clean \
  && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work
 
 CMD ["bash"]
 
