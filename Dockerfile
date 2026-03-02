@@ -3,7 +3,7 @@ FROM rocker/r2u:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
- && apt upgrade -y
+ && apt upgrade -y \
  && apt install -y --no-install-recommends \
     software-properties-common \
     libudunits2-dev libgdal-dev libgeos-dev \
