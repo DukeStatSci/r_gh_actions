@@ -37,3 +37,4 @@ ENV PATH="/work/.venv/bin:$PATH"
 ENV RETICULATE_PYTHON="/work/.venv/bin/python"
 
 CMD ["bash"]
+
