@@ -12,7 +12,7 @@ RUN apt update \
     wget git rsync curl \
  && sed -i 's/value="1GiB"/value="8GiB"/' /etc/ImageMagick-6/policy.xml
 
-RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb \
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.10.18/quarto-1.10.18-linux-amd64.deb \
  && apt install ./quarto-*-linux-amd64.deb \
  && rm quarto-*-linux-amd64.deb
 

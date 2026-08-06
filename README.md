@@ -13,7 +13,7 @@ The image is built on top of [`rocker/r2u`](https://rocker-project.org/images/ot
 On top of the base image it adds:
 
 - R packages: `devtools`, `rmarkdown`, `quarto`, `tidyverse`, `gifski`, `here`, `fs`, `pak`, and [`rundel/checklist`](https://github.com/rundel/checklist) from GitHub
-- Quarto CLI (v1.8.27) and pandoc
+- Quarto CLI (v1.10.18) and pandoc
 - Python 3.14 installed via [uv](https://docs.astral.sh/uv/), with a virtual environment preconfigured at `/work/.venv` (`RETICULATE_PYTHON` is set so reticulate uses it automatically; `uv pip install` inside the container targets it as well)
 - System libraries for common package needs: GDAL / GEOS / PROJ / udunits2 (`sf`, `terra`), ImageMagick (`magick`) with its disk cache limit raised to 8 GiB, GLPK (`igraph`), and libnode (`V8`)
 - Command line utilities: `git`, `wget`, `curl`, `rsync`
