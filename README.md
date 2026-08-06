@@ -15,7 +15,7 @@ On top of the base image it adds:
 - R packages: `devtools`, `rmarkdown`, `quarto`, `tidyverse`, `gifski`, `here`, `fs`, `pak`, and [`rundel/checklist`](https://github.com/rundel/checklist) from GitHub
 - Quarto CLI (v1.8.27) and pandoc
 - Python 3.14 installed via [uv](https://docs.astral.sh/uv/), with a virtual environment preconfigured at `/work/.venv` (`RETICULATE_PYTHON` is set so reticulate uses it automatically; `uv pip install` inside the container targets it as well)
-- System libraries for common package needs: GDAL / GEOS / PROJ / udunits2 (`sf`, `terra`), ImageMagick (`magick`) with its memory policy raised to 8 GiB, GLPK (`igraph`), and libnode (`V8`)
+- System libraries for common package needs: GDAL / GEOS / PROJ / udunits2 (`sf`, `terra`), ImageMagick (`magick`) with its disk cache limit raised to 8 GiB, GLPK (`igraph`), and libnode (`V8`)
 - Command line utilities: `git`, `wget`, `curl`, `rsync`
 
 The working directory is `/work` and the default command is `bash`.
@@ -82,4 +82,3 @@ Note that mounting over `/work` hides the prebuilt Python virtual environment at
 
 - [`Dockerfile`](Dockerfile) defines the image
 - [`.github/workflows/docker-publish.yml`](.github/workflows/docker-publish.yml) builds and publishes the image on pushes to `main`
-- [`Rprofile.site`](Rprofile.site) sets the Posit Package Manager CRAN repo (note: this file is not currently copied into the image by the `Dockerfile`)

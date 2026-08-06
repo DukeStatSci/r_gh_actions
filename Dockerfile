@@ -10,7 +10,7 @@ RUN apt update \
     libproj-dev pandoc libmagick++-dev \
     libglpk-dev libnode-dev \
     wget git rsync curl \
- && sed 's/value="1GiB"/value="8GiB"/1' /etc/ImageMagick-6/policy.xml > /etc/ImageMagick-6/policy.xml
+ && sed -i 's/value="1GiB"/value="8GiB"/' /etc/ImageMagick-6/policy.xml
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb \
  && apt install ./quarto-*-linux-amd64.deb \
