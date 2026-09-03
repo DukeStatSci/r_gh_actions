@@ -12,9 +12,9 @@ The image is built on top of [`rocker/r2u`](https://rocker-project.org/images/ot
 
 On top of the base image it adds:
 
-- R packages: `devtools`, `rmarkdown`, `quarto`, `tidyverse`, `gifski`, `here`, `fs`, `pak`, and [`rundel/checklist`](https://github.com/rundel/checklist) from GitHub
+- R packages: `devtools`, `rmarkdown`, `quarto`, `reticulate`, `tidyverse`, `gifski`, `here`, `fs`, `pak`, and [`rundel/checklist`](https://github.com/rundel/checklist) from GitHub
 - Quarto CLI (v1.10.18) and pandoc
-- Python 3.14 installed via [uv](https://docs.astral.sh/uv/), with a virtual environment preconfigured at `/work/.venv` (`RETICULATE_PYTHON` is set so reticulate uses it automatically; `uv pip install` inside the container targets it as well)
+- [uv](https://docs.astral.sh/uv/) 0.12.9 and Python 3.14. Projects should declare their Python version and dependencies with `.python-version`, `pyproject.toml`, and `uv.lock`; `uv sync` creates a project-local `.venv`.
 - System libraries for common package needs: GDAL / GEOS / PROJ / udunits2 (`sf`, `terra`), ImageMagick (`magick`) with its disk cache limit raised to 8 GiB, GLPK (`igraph`), and libnode (`V8`)
 - Command line utilities: `git`, `wget`, `curl`, `rsync`
 
@@ -76,7 +76,7 @@ docker run --rm -v "$(pwd)":/work ghcr.io/dukestatsci/r_gh_actions:latest \
   quarto render document.qmd
 ```
 
-Note that mounting over `/work` hides the prebuilt Python virtual environment at `/work/.venv`; if you need Python / reticulate locally, mount your project somewhere else (e.g. `-v "$(pwd)":/project -w /project`).
+For projects with a `pyproject.toml`, run `uv sync --locked` after mounting the project, then use `uv run` to execute commands in its project-local virtual environment.
 
 ## Repository contents
 

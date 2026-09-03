@@ -16,25 +16,17 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.10.18/qua
  && apt install ./quarto-*-linux-amd64.deb \
  && rm quarto-*-linux-amd64.deb
 
-RUN install.r devtools rmarkdown quarto tidyverse gifski here fs pak \
+RUN install.r devtools rmarkdown quarto reticulate tidyverse gifski here fs pak \
  && installGithub.r rundel/checklist
 
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.12.9 /uv /uvx /bin/
 
 RUN uv python install 3.14 \
- && uv python pin 3.14 \
- && mkdir /work \
- && cd /work \
- && uv venv 
+ && mkdir /work
 
 RUN apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /work
 
-ENV VIRTUAL_ENV="/work/.venv"
-ENV PATH="/work/.venv/bin:$PATH"
-ENV RETICULATE_PYTHON="/work/.venv/bin/python"
-
 CMD ["bash"]
-
